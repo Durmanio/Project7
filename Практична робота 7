@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cmath>
+
+int calculateIntersectionPoints(int x1, int y1, int r1, int x2, int y2, int r2) {
+    // Обчислення відстані між центрами колів
+    double distance = std::sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+
+    // Перевірка на випадок кола, що міститься всередині іншого кола
+    if (distance + std::min(r1, r2) <= std::max(r1, r2)) {
+
+        if (r1 == r2)
+            return -1;
+        else
+            return 0;
+    }
+
+    // Перевірка на випадок не перетину колів
+    if (distance > r1 + r2)
+        return 0;
+
+    // Обчислення кількості точок перетину
+    if (distance == r1 + r2)
+        return 1;
+    else
+        return 2;
+}
+
+int main() {
+    int x1, y1, r1, x2, y2, r2;
+
+    std::cout << "Enter the coordinates and radii of two circles (x1, y1, r1, x2, y2, r2): ";
+    std::cin >> x1 >> y1 >> r1 >> x2 >> y2 >> r2;
+
+    int intersectionPoints = calculateIntersectionPoints(x1, y1, r1, x2, y2, r2);
+
+    std::cout << "Number of intersection points: " << intersectionPoints << std::endl;
+
+    return 0;
+}
